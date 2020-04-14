@@ -12,11 +12,14 @@ public class LinkList<T extends Comparable<T>>
         linkList.insert(4);
         linkList.insert(3);
         linkList.insert(2);
+        linkList.insertToHead(9);
         linkList.insert(5);
         linkList.print();
         linkList.reverse();
         linkList.print();
-        linkList.mergeSort();
+        //        linkList.mergeSort();
+        //        linkList.print();
+        linkList.head = linkList.quickSort(linkList.head);
         linkList.print();
 
     }
@@ -65,7 +68,17 @@ public class LinkList<T extends Comparable<T>>
         }
         l.next = rs.next;
         r.next = null;
-        return null;
+
+        Node right = quickSort(head.next);
+        head.next = null;
+        Node left = quickSort(ls.next);
+
+        cur = left;
+        while (cur.next != null)
+            cur = cur.next;
+
+        cur.next = right;
+        return left;
     }
 
     public void reverse()
