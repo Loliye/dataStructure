@@ -1,14 +1,19 @@
 package com.mikufans;
 
+
 public class Index
 {
-    public static void main(String[] args)
+    public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException
     {
-        int arr[]={2,4,3,1,5};
-        Index index=new Index();
-        index.quickSort(arr,0,4);
-        for(int a:arr)
-        System.out.println(a);
+
+        System.out.println("hello world");
+//        Class cls =  Class.forName("com.mikufans.test.baozi.Demo");
+//        System.out.println(cls.getClassLoader());
+        //        int arr[]={2,4,3,1,5};
+        //        Index index=new Index();
+        //        index.quickSort(arr,0,4);
+        //        for(int a:arr)
+        //        System.out.println(a);
     }
 
     public void quickSort(int arr[], int l, int r)
