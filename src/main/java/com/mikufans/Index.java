@@ -6,8 +6,7 @@ public class Index
     public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException
     {
 
-        System.out.println("hello world");
-//        Class cls =  Class.forName("com.mikufans.test.baozi.Demo");
+        Class cls =  Class.forName("com.mikufans.test.baozi.Demo");
 //        System.out.println(cls.getClassLoader());
         //        int arr[]={2,4,3,1,5};
         //        Index index=new Index();
