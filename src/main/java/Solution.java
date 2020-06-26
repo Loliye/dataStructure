@@ -1,9 +1,219 @@
+import com.sun.org.apache.xpath.internal.FoundIndex;
 import org.omg.CORBA.INTERNAL;
 import org.omg.PortableInterceptor.INACTIVE;
 import sun.java2d.ScreenUpdateManager;
+import sun.nio.cs.ext.MacHebrew;
 import sun.reflect.generics.tree.Tree;
 
+
 import java.util.*;
+
+//public class Solution
+//{
+//
+//    Stack<Integer> stack = new Stack<>();
+//
+//    public void push(int node)
+//    {
+//        stack.push(node);
+//    }
+//
+//    public void pop()
+//    {
+//        stack.pop();
+//    }
+//
+//    public int top()
+//    {
+//        return stack.peek();
+//    }
+//
+//    public int min()
+//    {
+//        Integer[] array = (Integer[]) stack.toArray();
+//        int min = Integer.MAX_VALUE;
+//        for (int i = 0; i < array.length; i++)
+//            if (min > array[i])
+//                min = array[i];
+//            return min;
+//    }
+//}
+
+
+//public class Solution
+//{
+//    public boolean IsPopOrder(int[] pushA, int[] popA)
+//    {
+//        int cnt = 0;
+//        Stack<Integer> stack = new Stack<>();
+//        for (int i = 0; i < pushA.length; i++)
+//        {
+//            stack.push(pushA[i]);
+//            while (!stack.isEmpty()&&stack.peek()==popA[cnt])
+//            {
+//                stack.pop();
+//                cnt++;
+//            }
+//        }
+//        return stack.isEmpty();
+//    }
+//}
+
+
+//public class Solution
+//{
+//    public ArrayList<Integer> PrintFromTopToBottom(TreeNode root)
+//    {
+//        ArrayList<Integer> ans = new ArrayList<>();
+//        if (root == null)
+//            return ans;
+//
+//        Deque<TreeNode> deque = new LinkedList<>();
+//        deque.add(root);
+//        while (!deque.isEmpty())
+//        {
+//            TreeNode tmp = deque.pop();
+//            ans.add(tmp.val);
+//            if (tmp.left != null)
+//                deque.add(tmp.left);
+//            if (tmp.right != null)
+//                deque.add(tmp.right);
+//        }
+//        return ans;
+//    }
+//}
+
+
+//public class Solution
+//{
+//    public boolean VerifySquenceOfBST(int[] sequence)
+//    {
+//        return dfs(sequence,0,sequence.length);
+//    }
+//
+//    boolean dfs(int arr[], int start, int end)
+//    {
+//        if (end <= start)
+//            return true;
+//        int index = start;
+//        for (; index < end; index++)
+//        {
+//            if (arr[index] > arr[end])
+//                break;
+//        }
+//        for (int i = index; i < end; i++)
+//            if (arr[i] < arr[end])
+//                return false;
+//            return dfs(arr,start,index-1)&&dfs(arr,index,end-1);
+//    }
+//}
+
+
+//public class Solution
+//{
+//    ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
+//    ArrayList<Integer> res = new ArrayList<>();
+//
+//    public ArrayList<ArrayList<Integer>> FindPath(TreeNode root, int target)
+//    {
+//        if (root == null)
+//            return ans;
+//        res.add(root.val);
+//        target -= root.val;
+//        if (target == 0 && root.left == null && root.right == null)
+//        {
+//            ans.add(new ArrayList<>(res));
+//        }
+//        FindPath(root.left, target);
+//        FindPath(root.right, target);
+//        res.remove(res.size() - 1);
+//        return ans;
+//    }
+//}
+
+class RandomListNode
+{
+    int label;
+    RandomListNode next = null;
+    RandomListNode random = null;
+
+    RandomListNode(int label)
+    {
+        this.label = label;
+    }
+}
+
+
+//public class Solution
+//{
+//    TreeNode end = null;
+//    TreeNode head = null;
+//
+//    public TreeNode Convert(TreeNode pRootOfTree)
+//    {
+//        dfs(pRootOfTree);
+//        return head;
+//    }
+//
+//    void dfs(TreeNode cur)
+//    {
+//        if (cur == null)
+//            return;
+//        dfs(cur.left);
+//        if (end == null)
+//        {
+//            end = cur;
+//            head = cur;
+//        } else
+//        {
+//            end.right = cur;
+//            cur.left = end;
+//            end = cur;
+//        }
+//        dfs(cur.right);
+//    }
+//}
+
+
+//public class Solution
+//{
+//    ArrayList<String> ans = new ArrayList<>();
+//    int len;
+//    int cnt[] = new int[255];
+//    char[] res;
+//
+//    public ArrayList<String> Permutation(String str)
+//    {
+//        if(str.length()==0||str==null)
+//            return ans;
+//        len = str.length();
+//        res = new char[len];
+//        for (int i = 0; i < str.length(); i++)
+//            cnt[str.charAt(i)]++;
+//        dfs(0);
+//        return ans;
+//    }
+//
+//    public void dfs(int index)
+//    {
+//        if (index == len)
+//        {
+//            ans.add(String.valueOf(res));
+//            return;
+//        }
+//
+//        for (int i = 'A'; i <= 'z'; i++)
+//        {
+//            if (cnt[i] > 0)
+//            {
+//                cnt[i]--;
+//                res[index] = (char) i;
+//                dfs(index + 1);
+//                cnt[i]++;
+//            }
+//        }
+//    }
+//}
 
 
 class TreeNode
@@ -32,42 +242,178 @@ class ListNode
 }
 
 
-public class Solution
-{
-    public static void main(String[] args)
-    {
-        ArrayList<Integer> list = new ArrayList<>();
-        list.add(2);
-        list.add(3);
-        list.add(5);
-        list.add(4);
-        list.add(1);
-        Collections.sort(list, (i1, i2) -> {
-            return i1.compareTo(i2);
-        });
-        System.out.println(list);
-    }
+//public class Solution
+//{
+//    ArrayList<String> ans = new ArrayList<>();
+//
+//    public static void main(String[] args)
+//    {
+//        System.out.println(new Solution().Permutation("112"));
+//    }
+//    public ArrayList<String> Permutation(String str)
+//    {
+//        char[] chars = str.toCharArray();
+//        if (str == null || str.length() == 0)
+//            return ans;
+//
+//        dfs(chars, 0);
+//        return ans;
+//    }
+//
+//    public void dfs(char[] chars, int index)
+//    {
+//        if (index == chars.length - 1)
+//        {
+//            ans.add(String.valueOf(chars));
+//            return;
+//        }
+//
+//        for (int i = 0; i < chars.length; i++)
+//        {
+//            if(chars[i]!=chars[index])
+//            {
+//                swap(chars, index, i);
+//                dfs(chars, index + 1);
+//                swap(chars, index, i);
+//            }
+//        }
+//    }
+//
+//    void swap(char[] tmp, int a, int b)
+//    {
+//        char t = tmp[a];
+//        tmp[a] = tmp[b];
+//        tmp[b] = t;
+//    }
+//}
 
-    public String PrintMinNumber(int[] numbers)
-    {
-        String ans = "";
-        ArrayList<Integer> list = new ArrayList<>();
-        int len = numbers.length;
-        System.out.println(len);
-        for (int i = 0; i < len; i++)
-            list.add(numbers[i]);
 
-        Collections.sort(list, (o1, o2) -> {
-            String s1 = o1 + "" + o2;
-            String s2 = o2 + "" + o1;
-            return s1.compareTo(s2);
-        });
-        for (int i : list)
-            ans += i;
+//public class Solution
+//{
+//    ArrayList<String> ans = new ArrayList<>();
+//    char[] tmp;
+//    boolean[] flag;
+//
+//    public static void main(String[] args)
+//    {
+//        System.out.println(new Solution().Permutation("123"));
+//    }
+//
+//    public ArrayList<String> Permutation(String str)
+//    {
+//        if (str == null || str.length() == 0)
+//            return ans;
+//        char[] chars = str.toCharArray();
+//        flag = new boolean[chars.length];
+//        tmp = new char[chars.length];
+//        dfs(chars, 0);
+//        return ans;
+//    }
+//
+//    public void dfs(char[] chars, int index)
+//    {
+//        if (index > chars.length)
+//            return;
+//        if (index == chars.length)
+//        {
+//            ans.add(String.valueOf(tmp));
+//            return;
+//        }
+//
+//        for (int i = 0; i < chars.length; i++)
+//        {
+//            if (!flag[i])
+//            {
+//                tmp[index] = chars[i];
+//                flag[i] = true;
+//                dfs(chars, index + 1);
+//                flag[i] = false;
+//            }
+//        }
+//    }
+//}
 
-        return ans;
-    }
-}
+//public class Solution
+//{
+//    public static void main(String[] args)
+//    {
+//        System.out.println(new Solution().FindGreatestSumOfSubArray(new int[]{-2, -3, 4, -1, -2, 1, 5, -3}));
+//    }
+//
+//    public int FindGreatestSumOfSubArray(int[] array)
+//    {
+//        int ans = array[0], tmp = array[0];
+//        for (int i = 1; i < array.length; i++)
+//        {
+//            tmp = Math.max(tmp + array[i], array[i]);
+//            ans = Math.max(tmp, ans);
+//        }
+//        return ans;
+//    }
+//
+//}
+
+
+//public class Solution
+//{
+//    public int NumberOf1Between1AndN_Solution(int n)
+//    {
+//        int ans = 0;
+//        int i = 1;
+//        int cur = 0, before = 0, after = 0;
+//        while (n / i != 0)
+//        {
+//            cur = (n / i) % 10;
+//            before = n / (i * 10);
+//            after = n - (n / i) * i;
+//
+//            if (cur == 0)
+//                ans += before * i;
+//            else if (cur == 1)
+//                ans += before * i + after + 1;
+//            else ans += (before + 1) * i;
+//            i*=10;
+//        }
+//        return ans;
+//    }
+//}
+
+//public class Solution
+//{
+//    public static void main(String[] args)
+//    {
+//        ArrayList<Integer> list = new ArrayList<>();
+//        list.add(2);
+//        list.add(3);
+//        list.add(5);
+//        list.add(4);
+//        list.add(1);
+//        Collections.sort(list, (i1, i2) -> {
+//            return i1.compareTo(i2);
+//        });
+//        System.out.println(list);
+//    }
+//
+//    public String PrintMinNumber(int[] numbers)
+//    {
+//        String ans = "";
+//        ArrayList<Integer> list = new ArrayList<>();
+//        int len = numbers.length;
+//        System.out.println(len);
+//        for (int i = 0; i < len; i++)
+//            list.add(numbers[i]);
+//
+//        Collections.sort(list, (o1, o2) -> {
+//            String s1 = o1 + "" + o2;
+//            String s2 = o2 + "" + o1;
+//            return s1.compareTo(s2);
+//        });
+//        for (int i : list)
+//            ans += i;
+//
+//        return ans;
+//    }
+//}
 
 
 //public class Solution

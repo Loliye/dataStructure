@@ -23,7 +23,7 @@ public class QuickSort
 
     public int quickSort(Integer[] arr, int l, int r)
     {
-        int i = l, j = r, v = arr[l];
+        int i = l + 1, j = r, v = arr[l];
         while (i != j)
         {
             while (arr[j] >= arr[l] && i < j)
