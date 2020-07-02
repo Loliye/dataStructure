@@ -8,6 +8,385 @@ import sun.reflect.generics.tree.Tree;
 
 import java.util.*;
 
+public class Solution
+{
+    public static void main(String[] args)
+    {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int nums[] = new int[n];
+        for (int i = 0; i < n; i++)
+            nums[i] = scanner.nextInt();
+        int max = nums[0], sum = 0;
+        for (int i = 0; i < n; i++)
+        {
+            sum += nums[i];
+            if (sum > max)
+                max = sum;
+            if (sum < 0)
+                sum = 0;
+        }
+        System.out.println(max);
+    }
+}
+
+
+//public class Solution
+//{
+//    public boolean Find(int target, int[][] array)
+//    {
+//        int x = array[0].length;
+//        int y = array.length;
+//
+//        int i = 0, j = x - 1;
+//        while (j >= 0 && i < y)
+//        {
+//            int val = array[i][j];
+//            if (val > target)
+//                j--;
+//            else if (val < target)
+//                i++;
+//            else return true;
+//
+//        }
+//        return false;
+//    }
+//}
+
+
+//public class Solution
+//{
+//    public String replaceSpace(StringBuffer str)
+//    {
+//        StringBuffer buffer = new StringBuffer();
+//        if (str == null)
+//            return null;
+//
+//        for (int i = 0; i < str.length(); i++)
+//        {
+//            if (str.charAt(i) == ' ')
+//            {
+//                buffer.append('%');
+//                buffer.append('2');
+//                buffer.append('0');
+//            } else buffer.append(str.charAt(i));
+//        }
+//
+//        return buffer.toString();
+//    }
+//}
+
+
+//public class Solution
+//{
+//    public ArrayList<Integer> printListFromTailToHead(ListNode listNode)
+//    {
+//        ArrayList<Integer> list = new ArrayList<>();
+//        while (listNode != null)
+//        {
+//            list.add(0, listNode.val);
+//            listNode = listNode.next;
+//        }
+//        return list;
+//    }
+//}
+
+
+//public class Solution
+//{
+//    public static void main(String[] args)
+//    {
+//        int arr[] = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
+//        int[] ints = Arrays.copyOfRange(arr, 1, arr.length);
+//        System.out.println(Arrays.toString(ints));
+//    }
+//    //    public TreeNode reConstructBinaryTree(int[] pre, int[] in)
+//    //    {
+//    //        if (pre.length == 0)
+//    //            return null;
+//    //
+//    //        int val = pre[0];
+//    //        TreeNode node = new TreeNode(val);
+//    //        if (pre.length == 1)
+//    //            return node;
+//    //
+//    //        int flag = 0;
+//    //        for (int i = 0; i < in.length; i++)
+//    //        {
+//    //            if (val == in[i])
+//    //            {
+//    //                flag = i;
+//    //                break;
+//    //            }
+//    //        }
+//    //        node.left = reConstructBinaryTree(Arrays.copyOfRange(pre, 1, flag + 1),
+//    //                Arrays.copyOfRange(in, 0, flag));
+//    //        node.right = reConstructBinaryTree(Arrays.copyOfRange(pre, flag + 1, pre.length),
+//    //                Arrays.copyOfRange(in, flag + 1, in.length));
+//    //        return node;
+//    //    }
+//}
+
+//public class Solution
+//{
+//    Stack<Integer> stack1 = new Stack<Integer>();
+//    Stack<Integer> stack2 = new Stack<Integer>();
+//
+//    public void push(int node)
+//    {
+//        stack1.push(node);
+//    }
+//
+//    public int pop()
+//    {
+//        while (!stack1.isEmpty())
+//            stack2.push(stack1.pop());
+//
+//        int ans = stack2.pop();
+//        while (!stack2.isEmpty())
+//            stack1.push(stack2.pop());
+//        return ans;
+//    }
+//}
+
+//public class Solution
+//{
+//    public int minNumberInRotateArray(int[] array)
+//    {
+//        if (array.length == 0)
+//            return 0;
+//
+//        for (int i = 0; i < array.length - 1; i++)
+//        {
+//            if (array[i] > array[i + 1])
+//                return array[i + 1];
+//            if (i == array.length - 2)
+//                return array[0];
+//        }
+//        return 0;
+//    }
+//}
+
+
+//public class Solution
+//{
+//    public static int jumpFloor(int target)
+//    {
+//        if (target <= 0) return 0;
+//        return (int) Math.pow(2, target - 1);
+//    }
+//}
+
+
+//public class Solution
+//{
+//    public int NumberOf1(int n)
+//    {
+//        int cnt = 0;
+//        while (n != 0)
+//        {
+//            cnt++;
+//            n = n & (n - 1);
+//        }
+//        return cnt;
+//    }
+//}
+
+
+//public class Solution
+//{
+//    public void reOrderArray(int[] array)
+//    {
+//        int len = array.length;
+//        int cnt = 0;
+//        for (int i = 0; i < len; i++)
+//        {
+//            if (array[i] % 2 == 1)
+//            {
+//                int j = i;
+//                while (j > cnt)
+//                {
+//                    int tmp = array[j];
+//                    array[j] = array[j - 1];
+//                    array[j - 1] = tmp;
+//                    j--;
+//                }
+//                cnt++;
+//            }
+//        }
+//    }
+//}
+//
+
+//public class Solution
+//{
+//    public ListNode FindKthToTail(ListNode head, int k)
+//    {
+//        ListNode node = head;
+//        int cnt = 0;
+//        while (node != null)
+//        {
+//            cnt++;
+//            node = node.next;
+//        }
+//        node = head;
+//        for (int i = 0; i < cnt - k; i++)
+//            node = node.next;
+//        return node;
+//
+//    }
+//}
+
+//public class Solution
+//{
+//    public ListNode ReverseList(ListNode head)
+//    {
+//        ListNode pre = null;
+//        ListNode next = null;
+//        while (head != null)
+//        {
+//            next = head.next;
+//            head.next = pre;
+//            pre = head;
+//            head = next;
+//        }
+//        return pre;
+//    }
+//}
+
+//public class Solution
+//{
+//    public ListNode Merge(ListNode list1, ListNode list2)
+//    {
+//        if (list1 == null)
+//            return list2;
+//        if (list2 == null)
+//            return list1;
+//
+//        if (list1.val <= list2.val)
+//        {
+//            list1.next = Merge(list1.next, list2);
+//            return list1;
+//        } else
+//        {
+//            list2.next = Merge(list1, list2.next);
+//            return list2;
+//        }
+//    }
+//}
+
+
+//public class Solution
+//{
+//    public boolean HasSubtree(TreeNode root1, TreeNode root2)
+//    {
+//        boolean flag = false;
+//        if (root1 != null && root2 != null)
+//        {
+//            if (root1.val == root2.val)
+//            {
+//                flag = check(root1, root2);
+//            }
+//
+//            if (!flag)
+//                flag = check(root1.left, root2);
+//            if (!flag)
+//                flag = check(root1.right, root2);
+//
+//        }
+//        return flag;
+//    }
+//
+//    boolean check(TreeNode root, TreeNode tmp)
+//    {
+//        if (root == null && tmp != null)
+//            return false;
+//        if (tmp == null)
+//            return true;
+//        if (root.val != tmp.val)
+//            return false;
+//
+//        return check(root.left, tmp.left) && check(root.right, tmp.right);
+//    }
+//}
+
+//public class Solution
+//{
+//    public void Mirror(TreeNode root)
+//    {
+//        if (root == null)
+//            return;
+//        if (root.left == null && root.right == null)
+//            return;
+//        TreeNode tmp = root.left;
+//        root.left = root.right;
+//        root.right = tmp;
+//        if (root.left != null)
+//            Mirror(root.left);
+//        if (root.right != null)
+//            Mirror(root.right);
+//    }
+//}
+
+//
+//public class Solution
+//{
+//    public static void main(String[] args)
+//    {
+//        System.out.println(new Solution().printMatrix(new int[][]{{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}}));
+//    }
+//
+//    public ArrayList<Integer> printMatrix(int[][] matrix)
+//    {
+//        ArrayList<Integer> ans = new ArrayList<>();
+//        if (matrix == null || matrix.length == 0)
+//            return ans;
+//
+//        //1,2,3,4,8,12,16,15,14,13,9,5,6,7,11,10.
+//        int ex = matrix[0].length - 1;
+//        int ey = matrix.length - 1;
+//        int sx = 0, sy = 0;
+//        int cnt = 0;
+//        while (cnt < matrix.length*matrix[0].length)
+//        {
+//            for (int i = sx; i <= ex; i++)
+//            {
+//                cnt++;
+//                if(cnt== matrix.length*matrix[0].length)
+//                    return ans;
+//                ans.add(matrix[sy][i]);
+//            }
+//            sy++;
+//            for (int i = sy; i <= ey; i++)
+//            {
+//                cnt++;
+//                if(cnt== matrix.length*matrix[0].length)
+//                    return ans;
+//                ans.add(matrix[i][ex]);
+//            }
+//            ex--;
+//            for (int i = ex; i >= sx; i--)
+//            {
+//                cnt++;
+//                if(cnt== matrix.length*matrix[0].length)
+//                    return ans;
+//                ans.add(matrix[ey][i]);
+//            }
+//            ey--;
+//            for (int i = ey; i >= sy; i--)
+//            {
+//                cnt++;
+//                if(cnt== matrix.length*matrix[0].length)
+//                    return ans;
+//                ans.add(matrix[i][sx]);
+//            }
+//            sx++;
+//        }
+//        return ans;
+//    }
+//}
+
+
 //public class Solution
 //{
 //
