@@ -10,25 +10,291 @@ import java.util.*;
 
 public class Solution
 {
-    public static void main(String[] args)
+    /**
+     * k长连续子段和
+     *
+     * @param n int整型
+     * @param k int整型
+     * @param a int整型一维数组
+     * @return long长整型
+     */
+    public long solve(int n, int k, int[] a)
     {
-        Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();
-        int nums[] = new int[n];
-        for (int i = 0; i < n; i++)
-            nums[i] = scanner.nextInt();
-        int max = nums[0], sum = 0;
-        for (int i = 0; i < n; i++)
+        long sum[] = new long[n];
+        long dp[] = new long[n];
+        sum[0] = a[0];
+
+        for (int i = 1; i < n; i++)
+            sum[i] = sum[i - 1] + a[i];
+
+        dp[k - 1] = sum[k - 1];
+        long max = dp[k - 1];
+        for (int i = k; i < n; i++)
         {
-            sum += nums[i];
-            if (sum > max)
-                max = sum;
-            if (sum < 0)
-                sum = 0;
+            long tmp = sum[i] - sum[i - k];
+            dp[i] = Math.max(tmp, dp[i - 1] + a[i]);
+            max = Math.max(dp[i], max);
         }
-        System.out.println(max);
+        return max;
     }
 }
+
+
+//public class Solution
+//{
+//    public static void main(String[] args)
+//    {
+//        System.out.println(new Solution().solve(2, 1, new int[]{-757147, -507978500}));
+//    }
+//
+//    /**
+//     * k长连续子段和
+//     *
+//     * @param n int整型
+//     * @param k int整型
+//     * @param a int整型一维数组
+//     * @return long长整型
+//     */
+//    public long solve(int n, int k, int[] a)
+//    {
+//        // write code here
+//        int sum[] = new int[n + 1];
+//        for (int i = 1; i <= n; i++)
+//            sum[i] = sum[i - 1] + a[i - 1];
+//        int ans = sum[k];
+//        for (int i = k; i <= n; i++)
+//            for (int j = 0; j <= i; j++)
+//            {
+//                if (i - j + 1 >= k && i != j)
+//                    ans = Math.max(ans, sum[i] - sum[j]);
+//            }
+//
+//        return ans;
+//    }
+//}
+
+//public class Solution
+//{
+//    /**
+//     * @param s string字符串
+//     * @return int整型
+//     */
+//    public static void main(String[] args)
+//    {
+//        System.out.println(new Solution().solve("UR11645E64O45CACC1GR1560C303X1A24CDCBYLX1616D491I"));
+//    }
+//
+//    public int solve(String s)
+//    {
+//        // write code here
+//
+//        int ans = Integer.MIN_VALUE;
+//        int tmp = 0;
+//        char[] chars = s.toCharArray();
+//        for (int i = 0; i < chars.length; i++)
+//        {
+//            int tmp1 = chars[i] - '0';
+//            int tmp2 = chars[i] - 'A';
+//            if (tmp1 >= 0 && tmp1 <= 9)
+//                tmp = tmp * 16 + tmp1;
+//            else if (tmp2 <= 5 && tmp2 >= 0)
+//                tmp = tmp * 16 + tmp2 + 10;
+//            else
+//            {
+//                ans = Math.max(ans, tmp);
+//                tmp = 0;
+//            }
+//        }
+//        return ans;
+//    }
+//}
+
+
+//public class Solution
+//{
+//    final int Mod = (int) (1e9 + 7);
+//
+//    /**
+//     * 好多牛牛
+//     *
+//     * @param s string字符串
+//     * @return int整型
+//     */
+//    public int solve(String s)
+//    {
+//        // write code here
+//        int dp[] = new int[6];
+//        String ans = "niuniu";
+//        int len = s.length();
+//        for (int i = 0; i < len; i++)
+//        {
+//            for (int j = 0; j < 6; j++)
+//            {
+//                if (ans.charAt(j) == s.charAt(i))
+//                {
+//                    if (j == 0)
+//                        dp[j]++;
+//                    else dp[j] += dp[j - 1];
+//                    dp[j] %= Mod;
+//                }
+//            }
+//        }
+//
+//        return dp[5];
+//    }
+//}
+
+
+//public class Solution
+//{
+//
+//    ArrayList<Integer>[] v;
+//
+//    boolean vis[];
+//
+//
+//    public static void main(String[] args)
+//    {
+//        System.out.println(new Solution().solve(new int[]{7, 11}, new Point[]{
+//                new Point(3, 2),
+//                new Point(5, 1),
+//                new Point(1, 6),
+//                new Point(6, 4),
+//                new Point(7, 2),
+//                new Point(7, 4),
+//                new Point(4, 2),
+//                new Point(1, 3),
+//                new Point(6, 3),
+//                new Point(3, 7),
+//                new Point(5, 6)
+//        }));
+//    }
+//
+//
+//    /**
+//     * 能回到1号点返回 Yes，否则返回 No
+//     *
+//     * @param param int整型一维数组 param[0] 为 n，param[1] 为 m
+//     * @param edge  Point类一维数组 Point.x , Point.y 分别为一条边的两个点
+//     * @return string字符串
+//     */
+//    public String solve(int[] param, Point[] edge)
+//    {
+//        int n = param[0];
+//        int m = param[1];
+//        v = new ArrayList[n + 1];
+//        for (int i = 1; i <= n; i++)
+//            v[i] = new ArrayList<>();
+//        vis = new boolean[n + 1];
+//
+//        for (Point p : edge)
+//        {
+//            v[p.x].add(p.y);
+//            v[p.y].add(p.x);
+//        }
+//
+//        if (dfs(1, 1))
+//            return "Yes";
+//        else return "No";
+//
+//    }
+//
+//    boolean dfs(int u, int fa)
+//    {
+//        for (int i : v[u])
+//        {
+//            if (i == fa)
+//                continue;
+//            if (i == 1)
+//                return true;
+//            if (vis[i])
+//                continue;
+//            vis[i] = true;
+//            if (dfs(i, u))
+//                return true;
+//        }
+//        return false;
+//    }
+//
+//}
+
+
+class Point
+{
+    int x;
+    int y;
+
+    public Point(int x, int y)
+    {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+
+//public class Solution
+//{
+//    /**
+//     * @param n int整型
+//     * @param a int整型一维数组
+//     * @return int整型
+//     */
+//    public int work(int n, int[] a)
+//    {
+//        // write code here
+//        int ans = n;
+//        int tmp;
+//        for (int i = 1; i < n; i++)
+//        {
+//            tmp = a[i] - a[i - 1];
+//            if (tmp != 1 && !check(tmp))
+//            {
+//                if (tmp % 2 == 0 || check(tmp - 2))
+//                    ans += 1;
+//                else ans += 2;
+//            }
+//        }
+//        return ans;
+//    }
+//
+//    public static void main(String[] args)
+//    {
+//        System.out.println(new Solution().work(7,new int[]{0,3,10,15,16,24,28}));
+//    }
+//
+//    public boolean check(int n)
+//    {
+//        if (n == 1)
+//            return false;
+//        for (int i = 2; i * i <= n; i++)
+//            if (n % i == 0)
+//                return false;
+//        return true;
+//    }
+//}
+
+
+//public class Solution
+//{
+//    public static void main(String[] args)
+//    {
+//        Scanner scanner = new Scanner(System.in);
+//        int n = scanner.nextInt();
+//        int nums[] = new int[n];
+//        for (int i = 0; i < n; i++)
+//            nums[i] = scanner.nextInt();
+//        int max = nums[0], sum = 0;
+//        for (int i = 0; i < n; i++)
+//        {
+//            sum += nums[i];
+//            if (sum > max)
+//                max = sum;
+//            if (sum < 0)
+//                sum = 0;
+//        }
+//        System.out.println(max);
+//    }
+//}
 
 
 //public class Solution
