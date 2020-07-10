@@ -8,36 +8,171 @@ import sun.reflect.generics.tree.Tree;
 
 import java.util.*;
 
-public class Solution
-{
-    /**
-     * k长连续子段和
-     *
-     * @param n int整型
-     * @param k int整型
-     * @param a int整型一维数组
-     * @return long长整型
-     */
-    public long solve(int n, int k, int[] a)
-    {
-        long sum[] = new long[n];
-        long dp[] = new long[n];
-        sum[0] = a[0];
 
-        for (int i = 1; i < n; i++)
-            sum[i] = sum[i - 1] + a[i];
 
-        dp[k - 1] = sum[k - 1];
-        long max = dp[k - 1];
-        for (int i = k; i < n; i++)
-        {
-            long tmp = sum[i] - sum[i - k];
-            dp[i] = Math.max(tmp, dp[i - 1] + a[i]);
-            max = Math.max(dp[i], max);
-        }
-        return max;
-    }
-}
+
+//public class Solution
+//{
+//    /**
+//     * 又见台阶
+//     *
+//     * @param n int整型
+//     * @param m int整型
+//     * @param a int整型一维数组
+//     * @return int整型
+//     */
+//    static int Mod = (int) (1e9 + 7);
+//
+//    public static void main(String[] args)
+//    {
+//        System.out.println(new Solution().solve(9, 3, new int[]{1, 3, 5}));
+//    }
+//
+//    public int solve(int n, int m, int[] a)
+//    {
+//        // write code here
+//        int dp[] = new int[n + 1];
+//        dp[0] = 1;
+//        int cnt = 0;
+//        int odd = 0, even = 1;
+//        for (int i = 1; i <= n; i++)
+//        {
+//            if (cnt < m && i == a[cnt])
+//            {
+//                cnt++;
+//                continue;
+//            }
+//
+//            if ((i & 1) == 1)
+//            {
+//                dp[i] = (dp[i] + even) % Mod;
+//                odd = (odd + dp[i]) % Mod;
+//            } else
+//            {
+//                dp[i] = (dp[i] + odd) % Mod;
+//                even = (even + dp[i]) % Mod;
+//            }
+//
+//        }
+//        return dp[n];
+//    }
+//}
+
+
+//public class Solution
+//{
+//    public static void main(String[] args)
+//    {
+//        System.out.println(new Solution().solve(2, 10, new int[][]{{1, 5}, {2, 4}}));
+//    }
+//
+//    /**
+//     * @param n int整型 ：牛币值种类数
+//     * @param x int整型 ：牛妹拥有的钱数
+//     * @param a int整型二维数组 ：第二个vector中的第一列表示币值，第二列表示牛牛拥有币值的个数
+//     * @return int整型
+//     */
+//    public int solve(int n, int x, int[][] a)
+//    {
+//        // write code here
+//        int dp[][] = new int[51][101];
+//        int val[] = new int[101];
+//        int w[] = new int[101];
+//        for (int i = 1; i <= n; i++)
+//        {
+//            val[i] = a[i - 1][0];
+//            w[i] = a[i - 1][1];
+//        }
+//        dp[0][0] = 1;
+//        for (int i = 1; i <= n; i++)
+//            for (int j = 0; j <= x; j++)
+//            {
+//                if (dp[i - 1][j] != 0)
+//                {
+//                    for (int k = 0; k <= w[i] && j + k * val[i] <= x; k++)
+//                        dp[i][j + k * val[i]] += dp[i - 1][j];
+//                }
+//            }
+//        return dp[n][x];
+//    }
+//}
+
+
+//public class Solution
+//{
+//    public static void main(String[] args)
+//    {
+//        System.out.println(Arrays.toString(new Solution().continuousSet(new int[]
+//                {2, 1, 0, 4, 1, 0, 3, 4, 0, 2})));
+//    }
+//
+//    /**
+//     * 检查数组的每个前缀是不是一个好的集合
+//     *
+//     * @param mSet int整型一维数组
+//     * @return bool布尔型一维数组
+//     */
+//    public boolean[] continuousSet(int[] mSet)
+//    {
+//        // write code here
+//        if (mSet.length == 0) return new boolean[mSet.length];
+//        boolean ans[] = new boolean[mSet.length];
+//        //        int vis[] = new int[mSet.length];
+//        Map<Integer, Integer> vis = new HashMap<>();
+//        vis.put(mSet[0], 1);
+//        int min = mSet[0], max = mSet[0];
+//        int cnt = 0;
+//        ans[0] = true;
+//        for (int i = 1; i < mSet.length; i++)
+//        {
+//            if (vis.get(mSet[i]) != null)
+//                ans[i] = ans[i - 1];
+//            else
+//            {
+//                cnt++;
+//                min = Math.min(min, mSet[i]);
+//                max = Math.max(max, mSet[i]);
+//                if (max - min == cnt)
+//                    ans[i] = true;
+//                else ans[i] = false;
+//            }
+//            vis.put(mSet[i], 1);
+//        }
+//        return ans;
+//    }
+//}
+
+
+//public class Solution
+//{
+//    /**
+//     * k长连续子段和
+//     *
+//     * @param n int整型
+//     * @param k int整型
+//     * @param a int整型一维数组
+//     * @return long长整型
+//     */
+//    public long solve(int n, int k, int[] a)
+//    {
+//        long sum[] = new long[n];
+//        long dp[] = new long[n];
+//        sum[0] = a[0];
+//
+//        for (int i = 1; i < n; i++)
+//            sum[i] = sum[i - 1] + a[i];
+//
+//        dp[k - 1] = sum[k - 1];
+//        long max = dp[k - 1];
+//        for (int i = k; i < n; i++)
+//        {
+//            long tmp = sum[i] - sum[i - k];
+//            dp[i] = Math.max(tmp, dp[i - 1] + a[i]);
+//            max = Math.max(dp[i], max);
+//        }
+//        return max;
+//    }
+//}
 
 
 //public class Solution
