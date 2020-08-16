@@ -1,14 +1,322 @@
-import com.sun.org.apache.xpath.internal.FoundIndex;
-import org.omg.CORBA.INTERNAL;
-import org.omg.PortableInterceptor.INACTIVE;
-import sun.java2d.ScreenUpdateManager;
-import sun.nio.cs.ext.MacHebrew;
-import sun.reflect.generics.tree.Tree;
+import java.util.Arrays;
+import java.util.Scanner;
 
 
-import java.util.*;
+public class Solution
+{
+    public static void main(String sgf[])
+    {
 
 
+        StringBuffer a = new StringBuffer("A");
+
+        StringBuffer b = new StringBuffer("B");
+
+        a.append(b);
+        b = a;
+
+        //        operate(a, b);
+        //        System.out.println(a + " " + b);
+
+
+        Integer c = 1000, d = 1000;
+        add(c, d);
+        System.out.println(c + " " + d);
+    }
+
+    int anInt;
+    public void add(){
+        this.anInt=1;
+    }
+
+    static void add(Integer a, Integer b)
+    {
+        a += b;
+        b = a;
+    }
+
+    static void operate(StringBuffer x, StringBuffer y)
+    {
+        x.append(y);
+        y = x;
+    }
+
+    public  Solution()
+    {}
+
+}
+
+//public class Solution
+//{
+//
+//    public static int[] arr = new int[20];
+//    public static int ans[] = new int[10];
+//
+//    public static boolean dfs(int cnt, int head)
+//    {
+//        if (cnt == 14)
+//            return true;
+//        if (head == 0)
+//        {
+//            for (int i = 1; i <= 9; i++)
+//                if (arr[i] >= 2)
+//                {
+//                    arr[i] -= 2;
+//                    dfs(cnt + 2, 1);
+//                    arr[i] += 2;
+//                }
+//
+//            return false;
+//        }
+//
+//        for (int i = 1; i <= 9; i++)
+//        {
+//            if (arr[i] >= 3)
+//            {
+//                arr[i] -= 3;
+//                dfs(cnt + 3, head);
+//                arr[i] += 3;
+//            }
+//
+//            if (arr[i] > 0 && i + 3 < 9 && arr[i + 1] > 0 && arr[i + 2] > 0)
+//            {
+//                arr[i] -= 1;
+//                arr[i + 1] -= 1;
+//                arr[i + 2] -= 1;
+//                dfs(cnt + 3, head);
+//                arr[i] += 1;
+//                arr[i + 1] += 1;
+//                arr[i + 2] += 1;
+//            }
+//        }
+//        return false;
+//    }
+//
+//    public static void main(String[] args)
+//    {
+//        Scanner scanner = new Scanner(System.in);
+//        for (int i = 0; i < 13; i++)
+//            arr[i] = scanner.nextInt();
+//        for (int i = 9; i <= 9; i++)
+//        {
+//            arr[i]++;
+//            if (dfs(0, 0))
+//                ans[i]++;
+//            arr[i]--;
+//        }
+//        for (int i : ans)
+//            System.out.println(i);
+//    }
+//}
+
+
+//public class Solution
+//{
+//    public static StringBuilder builder;
+//
+//    public static void main(String[] args)
+//    {
+//        Scanner scanner = new Scanner(System.in);
+//        int n = scanner.nextInt();
+//        for (int i = 0; i < n; i++)
+//        {
+//            String string = scanner.next();
+//            builder = new StringBuilder(string);
+//            for (int j = 0; j < builder.length(); j++)
+//                while (judge(j)) ;
+//            System.out.println(builder.toString());
+//        }
+//
+//    }
+//
+//    /**
+//     * haha
+//     *
+//     * @param index haha
+//     * @return haha
+//     */
+//    public static boolean judge(int index)
+//    {
+//        if (builder.toString().length() >= index + 3 && (builder.charAt(index) == builder.charAt(index + 1)))
+//        {
+//            if (builder.charAt(index) == builder.charAt(index + 2))
+//            {
+//                builder.deleteCharAt(index + 1);
+//                return true;
+//            } else if (builder.length() >= index + 4 && builder.charAt(index + 2) == builder.charAt(index + 3))
+//            {
+//                builder.deleteCharAt(index + 2);
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+//}
+
+//public class Solution
+//{
+//    public static void print(String s)
+//    {
+//        System.out.println(s);
+//    }
+//
+//    /**
+//     * @param n int整型 只剩下一只蛋糕的时候是在第n天发生的．
+//     * @return int整型
+//     */
+//    public int cakeNumber(int n)
+//    {
+//        // write code here
+//        int ans=1;
+//        while(n-->1)
+//        {
+//            ans=3*(ans+1)/2;
+//        }
+//        return ans;
+//    }
+//
+//    public static void main(String[] args)
+//    {
+//        List<String> list=new ArrayList<>();
+//        list.add("name1");
+//        list.add("name2");
+//        list.add("name3");
+//        list.add("name4");
+//
+//        list.forEach(Solution::print);
+//    }
+//}
+
+
+//public class Solution
+//{
+//    int mod = (int) (1e9 + 7);
+//
+//    public static void main(String[] args)
+//    {
+//        System.out.println(new Solution().solve(350, 35, new int[]{3, 3, 3, 1, 1, 2, 1, 2, 2, 3, 3, 1, 3, 1, 3, 1, 2, 3, 3, 2, 1, 3, 3, 1, 1, 2, 1, 1, 2, 1, 2, 2, 3, 3, 3},
+//                new int[]{302, 47, 85, 8, 13, 1, 329, 239, 31, 231, 57, 343, 87, 241, 199, 15, 57, 279, 246, 33, 163, 57, 79, 284, 315, 91, 236, 345, 101, 235, 288, 110, 200, 32, 249}));
+//    }
+//
+//    public int solve(int n, int m, int[] x, int[] y)
+//    {
+//        int ans[][] = new int[5][n + 1];
+//        int a[][] = new int[5][n + 1];
+//        for (int i = 0; i < m; i++)
+//            a[x[i]][y[i]] = 1;
+//        ans[1][1] = 1;
+//
+//        for (int j = 1; j <= n; j++)
+//        {
+//            for (int i = 1; i <= 3; i++)
+//                if (a[i][j] != 1)
+//                    ans[i][j] += ((ans[i - 1][j - 1] + ans[i][j - 1]) % mod + ans[i + 1][j - 1]) % mod;
+//        }
+//        return ans[3][n];
+//    }
+//}
+
+
+//public class Solution
+//{
+//
+//    public static void main(String[] args)
+//    {
+//        System.out.println(Arrays.toString(new Solution().solve(4, 1, new int[]{1, 2, 2}, new int[]{2, 3, 4}, new int[]{3})));
+//    }
+//
+//    ArrayList<Integer>[] node;
+//    int depth[];
+//    int child[];
+//
+//    public int[] solve(int n, int m, int[] u, int[] v, int[] x)
+//    {
+//        node = new ArrayList[n + 1];
+//        depth = new int[n + 1];
+//        child = new int[n + 1];
+//        for (int i = 1; i <= n; i++)
+//            node[i] = new ArrayList<>();
+//
+//        for (int i = 0; i < n - 1; i++)
+//        {
+//            node[u[i]].add(v[i]);
+//            node[v[i]].add(u[i]);
+//        }
+//
+//        dfs(1, -1, 0);
+//        int tot = 2 * (n - 1);
+//        int ans[] = new int[m];
+//        for (int i = 0; i < m; i++)
+//            ans[i] = tot - 2 * child[x[i]] - depth[x[i]];
+//
+//        return ans;
+//
+//    }
+//
+//    int dfs(int u, int fa, int d)
+//    {
+//        depth[u] = d;
+//        int cnt = 0;
+//        for (int v : node[u])
+//            if (v == fa)
+//                continue;
+//            else cnt += dfs(v, u, d + 1);
+//        child[u] = cnt;
+//        return cnt + 1;
+//    }
+//
+//}
+
+
+//public class Solution
+//{
+//    ArrayList<Integer>[] node;
+//    int val[];
+//    int ans, m;
+//
+//    public static void main(String[] args)
+//    {
+//        System.out.println(new Solution().solve(3, 2, 3, new int[]{1, 1}, new int[]{2, 3}, new int[]{1, 3, 2}));
+//    }
+//
+//    public boolean solve(int n, int k, int m, int[] u, int[] v, int[] x)
+//    {
+//        // write code here
+//        node = new ArrayList[n + 1];
+//        val = new int[n + 1];
+//        for (int i = 1; i <= n; i++)
+//        {
+//            val[i] = x[i - 1];
+//            node[i] = new ArrayList<>();
+//        }
+//        this.m = m;
+//        for (int i = 0; i < n - 1; i++)
+//        {
+//            node[u[i]].add(v[i]);
+//            node[v[i]].add(u[i]);
+//        }
+//
+//        dfs(1,-1);
+//        return ans >= k;
+//    }
+//
+//    int dfs(int u,int fa)
+//    {
+//        int val = this.val[u];
+//        for (int v : node[u])
+//            if (v == fa)
+//                continue;
+//            else val += dfs(v,u);
+//
+//        if (val >= m)
+//        {
+//            val = 0;
+//            ans++;
+//        }
+//        return val;
+//    }
+//
+//}
 
 
 //public class Solution
