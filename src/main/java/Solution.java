@@ -1,50 +1,589 @@
-import java.util.Arrays;
-import java.util.Scanner;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.stream.Collectors;
 
 
 public class Solution
 {
-    public static void main(String sgf[])
+
+    public static void main(String[] args)
     {
-
-
-        StringBuffer a = new StringBuffer("A");
-
-        StringBuffer b = new StringBuffer("B");
-
-        a.append(b);
-        b = a;
-
-        //        operate(a, b);
-        //        System.out.println(a + " " + b);
-
-
-        Integer c = 1000, d = 1000;
-        add(c, d);
-        System.out.println(c + " " + d);
+        new Solution().numOfSubarrays(new int[]{1, 2,3,4, 5,6,7});
     }
 
-    int anInt;
-    public void add(){
-        this.anInt=1;
-    }
-
-    static void add(Integer a, Integer b)
+    public int numOfSubarrays(int[] arr)
     {
-        a += b;
-        b = a;
+        final int mod = 1000000007;
+        int n = arr.length;
+        int sum[] = new int[n + 1], ans = 0, cnt = 0;
+
+        for (int i = 1; i <= n; i++)
+        {
+            sum[i] = sum[i - 1] + arr[i - 1];
+            if (arr[i - 1] % 2 == 1)
+            {
+                cnt++;
+                ans++;
+            }
+        }
+
+        for (int i = 2; i < n; i++)
+        {
+            for (int j = 1; j < n - 1; j++)
+            {
+                if ((sum[i] - sum[j]) % 2 == 1)
+                    ans++;
+            }
+        }
+        System.out.println(ans);
+        return ans;
     }
-
-    static void operate(StringBuffer x, StringBuffer y)
-    {
-        x.append(y);
-        y = x;
-    }
-
-    public  Solution()
-    {}
-
 }
+
+//{
+//
+//    public static void main(String[] args)
+//    {
+//        Stu stu1 =new Stu(100,16,"abc");
+//        Stu stu2 =new Stu(99,16,"abc");
+//        Stu stu3 =new Stu(99,16,"abb");
+//        Stu stu4 =new Stu(100,16,"abb");
+//        Stu stu5 =new Stu(100,16,"bbc");
+//        Stu stu6 =new Stu(99,16,"bbc");
+//
+//        List<Stu> stus=new ArrayList<>();
+//        stus.add(stu1);
+//        stus.add(stu2);
+//        stus.add(stu3);
+//        stus.add(stu4);
+//        stus.add(stu5);
+//        stus.add(stu6);
+//        Stu[] stus1=new Stu[]{stu1,stu2, stu3,stu4,stu5,stu6};
+//
+//        Collections.sort(stus, (o1,o2)->{
+//            if(o1.score!=o2.score)
+//                return o1.score-o2.score;
+//            else if(o1.age!=o2.age)
+//                return o1.age-o2.age;
+//            else return o1.name.compareTo(o2.name);
+//        });
+//        for(Stu stu:stus)
+//            System.out.println(stu);
+//
+//        System.out.println("----------------------");
+//
+//        Arrays.sort(stus1,new Comparator<Stu>(){
+//            @Override
+//            public int compare(Stu o1, Stu o2)
+//            {
+//                if(o1.score!=o2.score)
+//                    return o1.score-o2.score;
+//                else if(o1.age!=o2.age)
+//                    return o1.age-o2.age;
+//                else return o1.name.compareTo(o2.name);
+//            }
+//        });
+//        for(Stu stu:stus1)
+//            System.out.println(stu);
+//    }
+//
+//}
+//
+//
+//class Stu
+//{
+//    int score,age;
+//    String name;
+//
+//
+//    public Stu(int score, int age, String name)
+//    {
+//        this.score = score;
+//        this.age = age;
+//        this.name = name;
+//    }
+//
+//    @Override
+//    public String toString()
+//    {
+//        return "Stu{" +
+//                "score=" + score +
+//                ", age=" + age +
+//                ", name='" + name + '\'' +
+//                '}';
+//    }
+//}
+
+//    public static void main(String[] args)
+//    {
+//        // int[][] grid = {{1, 0, 1}, {0, 0, 0}, {1, 0, 1}};
+//        int[][] grid = {{1, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 1}};
+//        Solution solution = new Solution();
+//        int res = solution.bfs(grid);
+//        System.out.println(res);
+//    }
+//
+//    int bfs(int arr[][])
+//    {
+//        int n = arr.length, m = arr[0].length;
+//        int[] dx = {0, 0, 1, -1};
+//        int[] dy = {1, -1, 0, 0};
+//        Queue<int[]> queue = new ArrayDeque<>();
+//        for (int i = 0; i < n; i++)
+//            for (int j = 0; j < n; j++)
+//                if (arr[i][j] == 1)
+//                    queue.offer(new int[]{i, j});
+//
+//        int ans[] = null;
+//        boolean flag = false;
+//        while (!queue.isEmpty())
+//        {
+//            ans = queue.poll();
+//            int x = ans[0], y = ans[1];
+//
+//            for (int i = 0; i < 4; i++)
+//            {
+//                int nx = x + dx[i], ny = y + dy[i];
+//                if (nx < 0 || nx >= n || ny < 0 || ny >= m || arr[nx][ny] != 0)
+//                    continue;
+//                arr[nx][ny] = arr[x][y] + 1;
+//                flag = true;
+//                queue.offer(new int[]{nx, ny});
+//            }
+//        }
+//        if (!flag || ans == null)
+//            return -1;
+//        return arr[ans[0]][ans[1]] - 1;
+//    }
+//
+
+//    public int maxDistance(int[][] grid)
+//    {
+//        // 方向向量
+//        int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+//
+//        // 由于题目中给出了 grid 的范围，因此不用做输入检查
+//        int N = grid.length;
+//
+//        Queue<Integer> queue = new LinkedList<>();
+//        for (int i = 0; i < N; i++)
+//        {
+//            for (int j = 0; j < N; j++)
+//            {
+//                if (grid[i][j] == 1)
+//                {
+//                    queue.add(getIndex(i, j, N));
+//                }
+//            }
+//        }
+//
+//        int size = queue.size();
+//        if (size == 0 || size == N * N)
+//        {
+//            return -1;
+//        }
+//
+//        int step = 0;
+//        while (!queue.isEmpty())
+//        {
+//
+//            int currentQueueSize = queue.size();
+//            for (int i = 0; i < currentQueueSize; i++)
+//            {
+//                Integer head = queue.poll();
+//
+//                int currentX = head / N;
+//                int currentY = head % N;
+//
+//                for (int[] direction : directions)
+//                {
+//                    int newX = currentX + direction[0];
+//                    int newY = currentY + direction[1];
+//
+//                    // 只关心有效范围内的海洋（0）
+//                    if (inArea(newX, newY, N) && grid[newX][newY] == 0)
+//                    {
+//                        // 赋值成为一个不等于 0 的整数均可，因为后续逻辑只关心海洋（0）
+//                        grid[newX][newY] = 1;
+//                        queue.add(getIndex(newX, newY, N));
+//                    }
+//                }
+//            }
+//
+//            step++;
+//        }
+//        // 由于最后一步，没有可以扩散的的区域，但是 step 加了 1，故在退出循环的时候应该减 1
+//        return step - 1;
+//    }
+//
+//    /**
+//     * @param x    二维表格单元格横坐标
+//     * @param y    二维表格单元格纵坐标
+//     * @param cols 二维表格列数
+//     * @return
+//     */
+//    private int getIndex(int x, int y, int cols)
+//    {
+//        return x * cols + y;
+//    }
+//
+//    /**
+//     * @param x 二维表格单元格横坐标
+//     * @param y 二维表格单元格纵坐标
+//     * @param N 二维表格行数（列数）
+//     * @return 是否在二维表格有效范围内
+//     */
+//    private boolean inArea(int x, int y, int N)
+//    {
+//        return 0 <= x && x < N && 0 <= y && y < N;
+//    }
+//}
+
+
+//public class Solution
+//{
+//    public static void main(String[] args)
+//    {
+//        Queue<int[]> queue=new ArrayDeque<>();
+//        ((ArrayDeque<int[]>) queue).pop()
+//    }
+//}
+//{
+//
+//    SegmentTree tree;
+//    int len;
+//
+//    public Solution(int[] nums)
+//    {
+//        if (nums.length > 0)
+//        {
+//            int data[] = new int[nums.length + 1];
+//            len = nums.length;
+//            for (int i = 1; i <= nums.length; i++)
+//                data[i] = nums[i - 1];
+//            tree = new SegmentTree(data);
+//        }
+//    }
+//
+//
+//    public void update(int i, int val)
+//    {
+//        tree.update(1, 1, len, i + 1, val);
+//    }
+//
+//    public int sumRange(int i, int j)
+//    {
+//        return tree.query(1, 1, len, i + 1, j + 1);
+//    }
+//
+//}
+//
+//class SegmentTree
+//{
+//    int data[];
+//    int tree[];
+//
+//    public SegmentTree(int arr[])
+//    {
+//        data = new int[arr.length + 1];
+//        System.arraycopy(arr, 0, data, 0, arr.length);
+//        tree = new int[arr.length * 10];
+//        build(1, 1, arr.length - 1);
+//    }
+//
+//    void build(int root, int left, int right)
+//    {
+//        if (left == right)
+//        {
+//            tree[root] = data[left];
+//            return;
+//        }
+//        int mid = (right + left) / 2;
+//        build(root * 2, left, mid);
+//        build(root * 2 + 1, mid + 1, right);
+//        tree[root] = tree[root * 2] + tree[root * 2 + 1];
+//    }
+//
+//    int query(int root, int left, int right, int ql, int qr)
+//    {
+//        int ans = 0;
+//        if (ql == left && qr == right)
+//            return tree[root];
+//
+//        int mid = (right + left) / 2;
+//        if (ql > mid)
+//            ans += query(root * 2 + 1, mid + 1, right, ql, qr);
+//        if (qr <= mid)
+//            ans += query(root * 2, left, mid, ql, qr);
+//        return ans;
+//    }
+//
+//    void update(int root, int left, int right, int pos, int val)
+//    {
+//        if (left == right)
+//        {
+//            tree[root] = val;
+//            return;
+//        }
+//
+//        int mid = (right + left) / 2;
+//        if (pos <= mid)
+//            update(root * 2, left, mid, pos, val);
+//        else update(root * 2 + 1, mid + 1, right, pos, val);
+//        tree[root] = tree[root * 2] + tree[root * 2 + 1];
+//    }
+//
+//}
+
+
+//{
+//
+//    List<List<Integer>> ans = new ArrayList<>();
+//    int n, arr[];
+//
+//    public static void main(String[] args)
+//    {
+//        // 精确到毫秒
+//        // 获取当前时间戳
+//        System.out.println(System.currentTimeMillis());
+//        System.out.println(Calendar.getInstance().getTimeInMillis());
+//        System.out.println(new Date().getTime());
+//
+//        // 精确到秒
+//        // 获取当前时间戳
+//        System.out.println(System.currentTimeMillis() / 1000);
+//        System.out.println(Calendar.getInstance().getTimeInMillis() / 1000);
+//        System.out.println(new Date().getTime() / 1000);
+//
+//        // 精确到毫秒
+//        // 获取指定格式的时间
+//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
+//        // 输出字符串
+//        System.out.println(df.format(new Date()));
+//        // 获取指定时间Date对象，参数是时间戳，只能精确到秒
+//        System.out.println("当前时间：" + new Date());
+//        df.getCalendar();
+//        // 获取指定时间的时间戳
+//        try
+//        {
+//            System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS").parse("2020-08-25 22:30:55:386").getTime());
+//        } catch (ParseException e)
+//        {
+//            e.printStackTrace();
+//        }
+//
+//
+//        //        List<List<Integer>> lists = new Solution().findSubsequences(new int[]{4, 6, 7, 7});
+//        //        for (List<Integer> list : lists)
+//        //        {
+//        //            System.out.println(list);
+//        //        }
+//    }
+//
+//    public List<List<Integer>> findSubsequences(int[] nums)
+//    {
+//        n = nums.length;
+//        arr = nums;
+//        dfs(0, -101, new ArrayList<>());
+//        return ans;
+//    }
+//
+//    void dfs(int idx, int pre, List<Integer> res)
+//    {
+//        if (idx == n)
+//        {
+//            if (res.size() >= 2)
+//                ans.add(new ArrayList<>(res));
+//            return;
+//        }
+//        if (arr[idx] >= pre)
+//        {
+//            res.add(arr[idx]);
+//            dfs(idx + 1, arr[idx], res);
+//            res.remove(res.size() - 1);
+//        }
+//        if (arr[idx] != pre)
+//            dfs(idx + 1, pre, res);
+//
+//
+//    }
+
+
+//    public int[] smallerNumbersThanCurrent(int[] nums)
+//    {
+//        int cnt[] = new int[100];
+//        for (int i : nums)
+//        {
+//            cnt[i]++;
+//        }
+//        for (int i = 1; i <= 100; i++)
+//            cnt[i] += cnt[i - 1];
+//
+//        int ans[] = new int[nums.length];
+//
+//        for (int i = 0; i < nums.length; i++)
+//        {
+//
+//            if (nums[i] > 0) ans[i] = cnt[nums[i] - 1];
+//            else ans[i] = 0;
+//        }
+//        return ans;
+//    }
+
+
+//    private int[] weight;
+//    private int sum;
+//    private Random random = new Random();
+//
+//    public Solution(int w[])
+//    {
+//        this.weight = w;
+//        int len = w.length;
+//        for (int i = 1; i < len; i++)
+//            weight[i] += weight[i - 1];
+//        sum = weight[len - 1];
+//    }
+//
+//    public int pick()
+//    {
+//        int s = random.nextInt(sum);
+//        int index = Arrays.binarySearch(weight, s + 1);
+//        if (index < 0)
+//            return -index - 1;
+//        return index;
+//    }
+
+//    public Solution(int[] w)
+//    {
+//        this.weight = w;
+//        int len = w.length;
+//
+//        for (int i = 1; i < len; i++)
+//        {
+//            weight[i] += weight[i - 1];
+//        }
+//
+//        sum = weight[len - 1];
+//    }
+//    public int pickIndex()
+//
+//    {
+//        int s = random.nextInt(sum);
+//        int index = Arrays.binarySearch(weight, s + 1);
+//        if (index < 0)
+//        {
+//            return -index - 1;
+//        }
+//        return index;
+//    }
+
+
+//    public int numberOfSubarrays(int[] nums, int k)
+//    {
+//        // 数组 prefixCnt 的下标是前缀和（即当前奇数的个数），值是前缀和的个数。
+//        int[] prefixCnt = new int[nums.length + 1];
+//        prefixCnt[0] = 1;
+//        // 遍历原数组，计算当前的前缀和，统计到 prefixCnt 数组中，
+//        // 并且在 res 中累加上与当前前缀和差值为 k 的前缀和的个数。
+//        int res = 0, sum = 0;
+//        for (int num : nums)
+//        {
+//            sum += num & 1;
+//            prefixCnt[sum]++;
+//            if (sum >= k)
+//            {
+//                res += prefixCnt[sum - k];
+//            }
+//        }
+//        return res;
+//    }
+//
+//    public int test(int[] nums, int k)
+//    {
+//        int cnt[] = new int[nums.length + 1];
+//        cnt[0] = 1;
+//        int ans = 0, sum = 0;
+//        for (int i = 0; i < nums.length; i++)
+//        {
+//            sum += nums[i] & 1;
+//            cnt[sum]++;
+//            if (sum >= k)
+//            {
+//                ans += cnt[sum - k];
+//            }
+//        }
+//        return ans;
+//    }
+
+//    public int numberOfSubarrays1(int[] nums, int k)
+//    {
+//        int sum[] = new int[nums.length + 1];
+//        for (int i = 1; i <= nums.length; i++)
+//        {
+//            sum[i] = sum[i - 1] + nums[i - 1] % 2;
+//        }
+//
+//        int ans = 0;
+//        for (int i = 2; i <= nums.length; i++)
+//        {
+//            for (int j = 1; j < i; j++)
+//            {
+//                if (sum[i] - sum[j] == k) ans++;
+//            }
+//        }
+//        return ans;
+//    }
+//}
+
+
+//public class Solution
+//{
+//    public static void main(String sgf[])
+//    {
+//
+//
+//        StringBuffer a = new StringBuffer("A");
+//
+//        StringBuffer b = new StringBuffer("B");
+//
+//        a.append(b);
+//        b = a;
+//
+//        //        operate(a, b);
+//        //        System.out.println(a + " " + b);
+//
+//
+//        Integer c = 1000, d = 1000;
+//        add(c, d);
+//        System.out.println(c + " " + d);
+//    }
+//
+//    int anInt;
+//    public void add(){
+//        this.anInt=1;
+//    }
+//
+//    static void add(Integer a, Integer b)
+//    {
+//        a += b;
+//        b = a;
+//    }
+//
+//    static void operate(StringBuffer x, StringBuffer y)
+//    {
+//        x.append(y);
+//        y = x;
+//    }
+//
+//    public  Solution()
+//    {}
+//
+//}
+
 
 //public class Solution
 //{

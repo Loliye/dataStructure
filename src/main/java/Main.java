@@ -3,17 +3,198 @@ import java.util.*;
 
 public class Main
 {
+
     public static void main(String[] args)
     {
-        Scanner scanner = new Scanner(System.in);
-        String string = scanner.nextLine();
-        String[] s = string.split(" ");
-        for (int i = s.length - 1; i >= 0; i--)
+
+        //        System.out.println(7^1);
+
+        //        System.out.println(7^1^1);
+        //        int arr[]={1,5,6,3,2};int x=4;
+        //
+        //        int pos=0;
+        //        for(int i=0;i<arr.length;i++)
+        //        {
+        //            if(arr[i]<x)
+        //            {
+        //                swap(arr,i, pos);
+        //                pos++;
+        //            }
+        //        }
+        //
+        //        for(int i:arr)
+        //            System.out.print(i+" ");
+        int arr[] = new Main().spiralOrder(new int[][]{{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}});
+        for (int i : arr)
         {
-            System.out.print(s[i] + " ");
+            System.out.print(i + " ");
+        }
+
+    }
+
+    public int[] spiralOrder(int[][] matrix)
+    {
+        int nl = matrix.length, ml = matrix[0].length;
+        int cnt = 0, n = 0, m = 0, sum = nl * ml;
+        int ans[] = new int[nl * ml];
+        if (sum == 0) return ans;
+        while (true)
+        {
+            for (int i = m; i < ml; i++)
+                ans[cnt++] = matrix[n][i];
+            n++;
+            if (cnt == sum) return ans;
+            for (int i = n; i < nl; i++)
+                ans[cnt++] = matrix[i][ml - 1];
+            ml--;
+            if (cnt == sum) return ans;
+            for (int i = ml - 1; i >= m; i--)
+                ans[cnt++] = matrix[nl - 1][i];
+            nl--;
+            if (cnt == sum) return ans;
+            for (int i = nl - 1; i >= n; i--)
+                ans[cnt++] = matrix[i][m];
+            m++;
+            if (cnt == sum) return ans;
         }
     }
+
+    //    public static void swap(int arr[],int a,int b)
+    //    {
+    //        int tmp=arr[a];
+    //        arr[a]=arr[b];
+    //        arr[b]=tmp;
+    //    }
+
+    //    public static void main(String[] args)
+    //    {
+    //        Scanner scanner = new Scanner(System.in);
+    //        int a = scanner.nextInt();
+    //        int ans = 0;
+    //        int cnt[] = new int[11];
+    //        while (a > 0)
+    //        {
+    //            int tmp = a % 10;
+    //            a /= 10;
+    //            if (cnt[tmp] > 0)
+    //                continue;
+    //            cnt[tmp]++;
+    //            ans+=tmp;
+    //            ans*=10;
+    //        }
+    //        System.out.println(ans/10);
+    //    }
 }
+//{
+//    public static void main(String[] args)
+//    {
+//        Scanner scanner = new Scanner(System.in);
+//        String a = scanner.nextLine();
+//        String b = scanner.nextLine();
+//        a = a.substring(1, a.length() - 1);
+//        b = b.substring(1, b.length() - 1);
+//        int ans = Integer.parseInt(a) + Integer.parseInt(b);
+//        System.out.println("\"" + ans + "\"");
+//    }
+//}
+
+
+//{
+//    public static void main(String[] args)
+//    {
+//        Scanner scanner = new Scanner(System.in);
+//        int n = scanner.nextInt();
+//        int sum[] = new int[n + 2];
+//        int dp[][] = new int[n + 2][n + 1];
+//        int a[] = new int[n + 1];
+//        for (int i = 1; i <= n; i++)
+//        {
+//            a[i] = scanner.nextInt();
+//            sum[i] = sum[i - 1] + a[i];
+//        }
+//
+//        for (int i = 2; i <= n; i++)
+//        {
+//            for (int s = 1; s <= n - i + 1; s++)
+//            {
+//                int e = s + i - 1;
+//                dp[s][e] = Integer.MAX_VALUE;
+//                for (int k = s; k < e; k++)
+//                {
+//
+//                    int tmp = sum[e] - sum[s - 1];
+//                    dp[s][e] = Integer.min(dp[s][e], dp[s][k] + dp[k + 1][e] + tmp);
+//                }
+//            }
+//        }
+//        System.out.println(dp[1][n]);
+//
+//    }
+//}
+
+//{
+//    public static void main(String[] args)
+//    {
+//        Scanner scanner = new Scanner(System.in);
+//        String string = scanner.nextLine();
+//        int len = string.length();
+//        int dp[][] = new int[len + 1][len + 1];
+//        int ans = 0;
+//        for (int i = len - 1; i >= 0; i--)
+//        {
+//            for (int j = i; j < len; j++)
+//            {
+//                boolean b = string.charAt(i) == string.charAt(j);
+//                if (i == j)
+//                    dp[i][j] = 1;
+//
+//                else if (j - i == 1)
+//                {
+//                    if (b)
+//                        dp[i][j] = 1;
+//                    else dp[i][j] = 0;
+//                } else
+//                {
+//                    if (dp[i + 1][j - 1] == 1 && b)
+//                        dp[i][j] = 1;
+//                    else dp[i][j] = 0;
+//                }
+//
+//                if (dp[i][j] == 1)
+//                    ans++;
+//            }
+//        }
+//
+//        System.out.println(ans);
+//    }
+//}
+
+//{
+//    public static void main(String[] args)
+//    {
+//        Scanner scanner = new Scanner(System.in);
+//        String a = scanner.nextLine();
+//        String b = scanner.nextLine();
+//        a = a.substring(1, a.length() - 1);
+//        b = b.substring(1, b.length() - 1);
+//        int ans = Integer.parseInt(a) + Integer.parseInt(b);
+//        System.out.println("\"" + ans + "\"");
+//    }
+//}
+
+
+//{
+//    public static void main(String[] args)
+//    {
+//        Scanner scanner = new Scanner(System.in);
+//        String string = scanner.nextLine();
+//        String[] s = string.split(" ");
+//        for (int i = s.length - 1; i >= 0; i--)
+//        {
+//            System.out.print(s[i] + " ");
+//        }
+//    }
+//}
 
 //public class Main
 //{
